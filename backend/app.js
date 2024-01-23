@@ -13,10 +13,12 @@ app.use(cookieParser())
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(fileupload());
 //route imports
-
+const post = require('./routes/postRoutes');
 const user = require('./routes/userRoutes');
 
 app.use("/api/v1",user);
+app.use("/api/v1",post);
+
 
 
 app.use(errorMiddleware)

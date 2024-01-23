@@ -40,6 +40,27 @@ const userSchema=new mongoose.Schema({
         type:Date,
         default:Date.now
     },
+    post:[
+        {
+            type:mongoose.Schema.ObjectId,
+            ref:'Post'
+        }
+    ],
+    followers:[
+        {
+            type:mongoose.Schema.ObjectId,
+            ref:'User'
+        }
+    ],
+    following:[
+        {
+            type:mongoose.Schema.ObjectId,
+            ref:'User'
+        }
+    ],
+    
+    
+    
     // resetPasswordToken:String,
     // resetPasswordExpire:Date,
 
