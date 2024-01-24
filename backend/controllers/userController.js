@@ -4,6 +4,7 @@ const ErrorHandler = require("../utils/errorhandler");
 const User=require('../models/userModel')
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
+const Post = require('../models/postModel');
 const crypto=require('crypto');
 var cloudinary = require('cloudinary');
 
@@ -33,7 +34,7 @@ exports.registerUser = catchAsyncErrors( async(req, res, next) => {
 })
 //login user
 exports.loginUser = catchAsyncErrors( async(req, res, next) => {
-    const {email,password}=req.body;
+   try {const {email,password}=req.body;
     if(!email || !password){
         return next(new ErrorHandler('Please enter email and password',400));
     }
@@ -47,11 +48,27 @@ exports.loginUser = catchAsyncErrors( async(req, res, next) => {
     if(!isPasswordMatched){
         return next(new ErrorHandler('Invalid email or password',401));
     }
-    sendToken(user,200,res);
+    const token = user.getJWTToken();
+    const options = {
+        expires: new Date(
+            Date.now() + 90 *24 * 60 * 60 * 1000),
+        httpOnly: true,
+        domain:'localhost',
+        path:'/'
+    }
+    res.cookie(
+        "token", token, options).json({
+        success: true,
+        user,
+        token
+    })}
+    catch(error){
+        return next(new ErrorHandler(error,500));
+    }
 }
 )
 //logout user
-exports.logoutUser = catchAsyncErrors( async(req, res, next) => {
+exports.logoutUser =catchAsyncErrors(async(req, res, next) => {
         res.cookie('token',null,{
             expires:new Date(Date.now()),
             httpOnly:true
@@ -238,6 +255,7 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
         message: 'User deleted',
     });
 });
+
 
 
 

@@ -89,7 +89,7 @@ const LogInSignUp = (location) => {
       dispatch(clearErrors())
     }
     if(isAuthenticated){
-      navigate("/account")
+      navigate("/")
     }
     
   }, [dispatch,error,isAuthenticated]);

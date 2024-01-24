@@ -40,7 +40,7 @@ const userSchema=new mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    post:[
+    posts:[
         {
             type:mongoose.Schema.ObjectId,
             ref:'Post'
@@ -77,14 +77,13 @@ userSchema.pre('save',async function(next){
 })
 //jwt token
 userSchema.methods.getJWTToken=function(){
-    return jwt.sign({id:this._id},process.env.JWT_SECRET,{
-        expiresIn:process.env.JWT_EXPIRE,
-    });
+    return jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
 }
 
 userSchema.methods.comparePassword=async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password);
 }
+
 //generating password resset token
 // userSchema.methods.getResetPasswordToken=function(){
     
