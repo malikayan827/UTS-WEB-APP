@@ -1,33 +1,28 @@
 import React, { useState, useRef } from "react";
 import Header from "../components/Header";
 import "./Profile.css";
-import { CiLocationOn } from "react-icons/ci";
-import { PiBagSimpleBold } from "react-icons/pi";
-import { FaTwitter } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import "./Home.css";
 import { CiImageOn } from "react-icons/ci";
-import EditProfileModal1 from "../components/EditProfileModal";
-import { Form, FormControl } from "react-bootstrap";
+import { Button, Form, FormControl } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TiDeleteOutline } from "react-icons/ti";
 
-export default function Profile() {
+
+export default function Home() {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
 
   const handleImageClick = () => {
-    // Trigger the file input click when the image is clicked
     fileInputRef.current.click();
   };
 
   const handleFileChange = (e) => {
-    // Handle the selected file here
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
     console.log("Selected file:", selectedFile);
   };
   return (
-    <>
+    <div style={{backgroundColor:'black'}}>
       <div style={{ height: "50px" }}>
         <Header />
       </div>
@@ -37,159 +32,39 @@ export default function Profile() {
           {/* profileInfo */}
           <div className="profileInfo">
             {/* image part */}
+
             <div
               style={{
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "column",
+                gap: "4px",
                 alignItems: "center",
-                justifyContent: "space-between",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: "4px",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src="https://www.bing.com/th?id=OIP.LXgGL1pyJx2VIQcj3yXeGgHaFj&w=133&h=100&c=8&rs=1&qlt=90&o=6&dpr=1.1&pid=3.1&rm=2"
-                  alt="profile pic"
-                  className="UserImage"
-                />
-                <text className="userName">Muhammad Faraz Baig</text>
-              </div>
-              <EditProfileModal1 />
+              <img
+                src="https://www.bing.com/th?id=OIP.LXgGL1pyJx2VIQcj3yXeGgHaFj&w=133&h=100&c=8&rs=1&qlt=90&o=6&dpr=1.1&pid=3.1&rm=2"
+                alt="profile pic"
+                className="UserImage"
+              />
+              <text className="userName">Muhammad Faraz Baig</text>
+              <text className="userStatus">Software Developer</text>
             </div>
 
             <hr className="line" style={{ color: "white" }} />
-            {/* locationAndStatus */}
-            <div className="locationAndStatus">
-              <div>
-                <CiLocationOn style={{ color: "white" }} size={23} />
-                <text
-                  style={{
-                    color: "white",
-                    marginLeft: "15px",
-                    fontSize: "13px",
-                  }}
-                >
-                  Location
-                </text>
-              </div>
-              <div>
-                <PiBagSimpleBold style={{ color: "white" }} size={23} />
-                <text
-                  style={{
-                    color: "white",
-                    marginLeft: "15px",
-                    fontSize: "13px",
-                  }}
-                >
-                  Software Developer
-                </text>
-              </div>
-            </div>
-
-            <hr className="line" style={{ color: "white" }} />
-            {/* social profiles */}
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
-              <text
-                style={{ color: "white", fontWeight: "bold", fontSize: "15px" }}
-              >
-                Social Profiles
-              </text>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: "15px",
-                    }}
-                  >
-                    <FaTwitter style={{ color: "white" }} size={23} />
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <text
-                        style={{
-                          color: "white",
-                          fontSize: "14px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Twitter
-                      </text>
-                      <text style={{ color: "white", fontSize: "11px" }}>
-                        Premium Account
-                      </text>
-                    </div>
-                  </div>
-                  <EditProfileModal1 />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: "15px",
-                    }}
-                  >
-                    <FaLinkedin style={{ color: "white" }} size={23} />
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <text
-                        style={{
-                          color: "white",
-                          fontSize: "14px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Linked in
-                      </text>
-                      <text style={{ color: "white", fontSize: "11px" }}>
-                        PRO
-                      </text>
-                    </div>
-                  </div>
-                  <EditProfileModal1 />
-                </div>
-              </div>
+            {/* view profile */}
+            <div className="viewProfile">
+              <Button variant="secondary" className="viewProfileButton">View Profile</Button>
             </div>
           </div>
-        </div>
-
-        {/* center side */}
-        <div className="centerSide">
+          {/* create post */}
           <div className="createPost">
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                width: "100%",
                 justifyContent: "space-between",
+                width: "100%",
               }}
             >
               <div style={{ width: "13%" }}>
@@ -249,10 +124,16 @@ export default function Profile() {
               </div>
 
               <div>
-                <button className="postButton">Post</button>
+                <Button variant="secondary" className="postButton viewProfileButton">Post</Button>
               </div>
             </div>
-          </div>
+          </div>   
+        </div>
+        
+
+        {/* center side */}
+        <div className="centerSide">
+          
           <div className="post">
             <div
               style={{
@@ -369,6 +250,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

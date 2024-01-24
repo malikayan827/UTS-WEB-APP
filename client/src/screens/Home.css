@@ -1,0 +1,18 @@
+.userStatus{
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.viewProfile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.viewProfileButton{
+    font-size: 13px;
+    background-color: cornflowerblue;
+}
+

@@ -159,3 +159,13 @@
     align-items: center;
     /* background-color: #434343; */
 }
+
+.editArea:hover .editIcon {
+    cursor: pointer;
+    color:cornflowerblue;
+  }
+
+  .editIcon{
+    color: white;
+    /* font-size: 20px; */
+  }
