@@ -11,12 +11,9 @@ import LogInSignUp from "./components/user/loginsignup";
 import store from "./store";
 import { loadUser } from "./actions/userAction.js";
 import { useSelector } from "react-redux";
-import Profile from "./components/user/Porfile.js";
-import UpdateProfile from "./components/user/UpdateProfile.js";
-import UpdatePassword from "./components/user/UpdatePassword.js";
-import ForgotPassword from "./components/user/ForgotPassword.js";
-import ResetPassword from "./components/user/ResetPassword.js";
-
+import Profile from './screens/Profile.js'
+import UserOptions from "./components/user/UserOptions.js";
+import Loader from "./components/layout/loader/Loader.js";
 
 function App() {
   
@@ -32,11 +29,14 @@ function App() {
 
   return (
     <Router>
-      
+      {isAuthenticated && <UserOptions user={user} />}
       <Routes>
      
-        
-        <Route path="/login-register" element={<LogInSignUp />} />
+      
+        <Route path="/" element={<LogInSignUp />} />
+        {loading ? (<Route  path="/account" element={<Loader />}/>
+      ) : (isAuthenticated && <Route  path="/account" element={<Profile />}/>)}
+        {!isAuthenticated && <Route path="/account" element={<LogInSignUp />} />}
         
       </Routes>
       
