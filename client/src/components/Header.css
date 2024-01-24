@@ -1,0 +1,57 @@
+.headerBackground{
+    background-color: #434343;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+
+.LogoName{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    float: left;
+}
+
+.searchbarSize{
+    width: 200px;
+    height: 35px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    outline: none;
+    /* background-color: grey; */
+}
+
+.buttonSize{
+    width: 50px;
+    height: 35px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: grey; */
+    outline-color: none;
+}
+
+.d-flex{
+    margin-left: 10px;
+}
+
+.nameBackground{
+    background-color: grey;
+    border-radius: 5px;
+}
+
+.nameBackground:hover{
+    background-color: #434343;
+}
+
+.HomeLogo{
+    margin-right: 10px;
+}
+.HomeLogo:hover{
+    opacity: 0.5;
+}
