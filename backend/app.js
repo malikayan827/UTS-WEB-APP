@@ -5,6 +5,10 @@ const errorMiddleware=require('./middleware/error');
 const fileupload=require('express-fileupload'
 );
 const bodyparser=require('body-parser');
+const cors = require('cors');
+
+// Enable CORS for all routes
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser())
 

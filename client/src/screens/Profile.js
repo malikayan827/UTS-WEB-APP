@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "../components/Header";
 import "./Profile.css";
 import { CiLocationOn } from "react-icons/ci";
@@ -14,6 +14,14 @@ import { TiDeleteOutline } from "react-icons/ti";
 export default function Profile() {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
+  const [postText, setPostText] = useState("");
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setToken(token);
+    console.log(token);
+  }, []);
 
   const handleImageClick = () => {
     // Trigger the file input click when the image is clicked
@@ -26,6 +34,56 @@ export default function Profile() {
     setFile(selectedFile);
     console.log("Selected file:", selectedFile);
   };
+
+  // const handlePost = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:4000/api/v1/post/upload", {
+  //       method: "POST",
+  //       headers: {
+  //         // Add any headers if required
+  //         'Content-Type': 'multipart/form-data',
+  //         'Authorization': `Bearer ${token}`
+  //       },
+  //       body : {
+  //         // Add form data
+  //         description: postText,
+  //         image: file
+  //       }
+
+  //     });
+
+  //     const result = await response.json();
+
+  //     // Handle the result as needed (e.g., show success message, update UI)
+  //     console.log("Post response:", result);
+  //   } catch (error) {
+  //     console.error("Error posting:", error);
+  //   }
+  // };
+  const handlePost = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("description", postText);
+      // formData.append("image", file);
+  
+      const response = await fetch("http://localhost:4000/api/v1/post/upload", {
+        method: "POST",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData,
+      });
+  
+      const result = await response.json();
+  
+      // Handle the result as needed (e.g., show success message, update UI)
+      console.log("Post response:", result);
+    } catch (error) {
+      console.error("Error posting:", error);
+    }
+  };
+  
+
   return (
     <>
       <div style={{ height: "50px" }}>
@@ -205,6 +263,8 @@ export default function Profile() {
                     type="text"
                     placeholder="What`s on your mind..."
                     className="postText"
+                    value={postText}
+                    onChange={(e) => setPostText(e.target.value)}
                   />
                 </Form>
               </div>
@@ -249,7 +309,9 @@ export default function Profile() {
               </div>
 
               <div>
-                <button className="postButton">Post</button>
+                <button className="postButton" onClick={handlePost}>
+                  Post
+                </button>
               </div>
             </div>
           </div>
@@ -281,7 +343,7 @@ export default function Profile() {
                 </div>
               </div>
               <div className="editArea">
-                <TiDeleteOutline className="editIcon" size={24}/>
+                <TiDeleteOutline className="editIcon" size={24} />
               </div>
             </div>
             <text className="postTextShown">
